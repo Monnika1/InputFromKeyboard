@@ -14,15 +14,13 @@ namespace InputFromKeyboard
                 Console.WriteLine($"Output: {reversed}");
             }
         }
+        // qwerty
         static string ReverseText(string input)
         {
-            string result = "" + input[input.Length - 1];
-            for (int i = input.Length-2; i >=0; i--)
+            string result = string.Empty;
+            for (int i = input.Length-1; i >=0; i--)
             {
-                if (input[i] != input[i+1])
-                {
                     result += input[i];
-                }
             }
             return result;
         }
