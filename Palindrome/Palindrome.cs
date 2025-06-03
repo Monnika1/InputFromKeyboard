@@ -1,12 +1,12 @@
 ﻿namespace palindrome
 {
-    internal class Program
+    internal class Programa
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Enter a word or a phrase:...");
             string input = Console.ReadLine();
-            if (isPalindrome(input))
+            if (CheckPalindrome(input))
             {
                 Console.WriteLine("true");
             }
@@ -16,7 +16,7 @@
             }
 
         }
-        static bool isPalindrome(string input)
+        static bool CheckPalindrome(string input)
         {
             if (string.IsNullOrWhiteSpace(input)) return false;
 

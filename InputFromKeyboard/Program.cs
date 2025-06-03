@@ -2,7 +2,7 @@
 
 namespace InputFromKeyboard
 {
-    internal class Program
+    internal class ProgramA
     {
         static void Main(string[] args)
         {
