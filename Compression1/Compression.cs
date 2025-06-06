@@ -7,16 +7,16 @@ namespace Compression1
         static void Main(string[] args)
         {
            
-                Console.WriteLine(Compress("aaaaabbcd"));  
-                Console.WriteLine(Compress("abc"));        
-                Console.WriteLine(Compress("AAbbAA"));     
-                Console.WriteLine(Compress(""));           
+                Console.WriteLine(Compressed("aaaaabbcd"));  
+                Console.WriteLine(Compressed("abc"));        
+                Console.WriteLine(Compressed("AAbbAA"));     
+                Console.WriteLine(Compressed(""));           
 
-                Console.WriteLine(Decompress("a5b2c1d1")); 
-                Console.WriteLine(Decompress("A2b2A2"));   
+                Console.WriteLine(Decompressed("a5b2c1d1")); 
+                Console.WriteLine(Decompressed("A2b2A2"));   
             }
 
-            static string Compress(string input)
+            static string Compressed(string input)
             {
                 if (string.IsNullOrEmpty(input)) return input;
 
@@ -38,7 +38,7 @@ namespace Compression1
                 return compressed.Length < input.Length ? compressed.ToString() : input;
             }
 
-            static string Decompress(string input)
+            static string Decompressed(string input)
             {
                 if (string.IsNullOrEmpty(input)) return input;
 

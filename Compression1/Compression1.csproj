@@ -7,8 +7,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="C:\Users\Moni\OneDrive\Desktop\Shop\Compression1\Compression.cs" Link="Compression.cs" />
-  </ItemGroup>
+
 
 </Project>

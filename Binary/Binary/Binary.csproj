@@ -7,8 +7,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="C:\Users\Moni\OneDrive\Desktop\Shop\Binary\Binary.cs" Link="Binary.cs" />
-  </ItemGroup>
+
 
 </Project>
