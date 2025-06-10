@@ -9,7 +9,7 @@
             {
                 ("Alice", "A"),
                 ("Bob", "B"),
-                ("Kiril", "A"),
+                ("Kiril", "A"),\S
                 ("Max", "C")
             };
             var groupedStudents = students

@@ -6,20 +6,20 @@
         {
             List<int> numbers = new List<int> {1, 3, 2, 1, 4, 3, 2, 1 };
 
-            Dictionary<int, int> frequency = new Dictionary<int, int>();
+            Dictionary<int, int> dict = new Dictionary<int, int>();
 
             foreach (int number in numbers)
             {
-                if (frequency.ContainsKey(number))
+                if (dict.ContainsKey(number))
                 {
-                    frequency[number]++;
+                    dict[number]++;
                 }
                 else
                 {
-                    frequency[number] = 1;
+                    dict[number] = 1;
                 }
             }   
-            foreach (var kvp in frequency)
+            foreach (var kvp in dict)
             {
                 Console.WriteLine($"Number: {kvp.Key}, Frequency: {kvp.Value}");
             }
