@@ -8,6 +8,7 @@
             ReadFilesAndDirectories(rootPath);
             Console.ReadLine();
 
+           string name = MoniReturn("Monika");
         }
         static void ReadFilesAndDirectories(string path)
         {
@@ -20,7 +21,6 @@
                 {
                     Console.WriteLine(file);
                 }
-
                 var directories = Directory.GetDirectories(path);
 
                 foreach (var dir in directories)
@@ -33,6 +33,14 @@
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
+
+           
         }
+        static string MoniReturnn(string moni)
+        {
+            return moni;
+        }
+
+        static string MoniReturnV2(string moni) => moni;
     }
 }

@@ -5,7 +5,11 @@
         static void Main(string[] args)
         {
             HashSet<int> userIDs = new HashSet<int> {101,202,303,101,404,505,303 };
+            bool addResult = userIDs.Add(101);
+            if(addResult == false)
+                Console.WriteLine("ne stava");
             Console.WriteLine("Unique IDs:");
+            userIDs.Any(x => x > 100); // This line is not necessary, but shows how to use Any
             foreach (var id in userIDs)
             {
                 Console.WriteLine(id);
@@ -19,7 +23,7 @@
                 Console.WriteLine("\nID 202 does not exist in the set.");
             }
             userIDs.Remove(404);
-            Console.WriteLine($"\nCount after removal:{userIDs.Count}");
+            Console.WriteLine($"Count after removal:{userIDs.Count}");
             
             HashSet<int> otherIDs = new HashSet<int> { 303, 505, 606, 707 };
 

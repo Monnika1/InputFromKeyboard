@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            List<string> fruits = new List<string> ();
+            List<string> fruits = new List<string>();   
             fruits.Add("Apple");
             fruits.Add("Lime");
             fruits.Add("Banana");
@@ -14,17 +14,18 @@
 
             fruits.RemoveAt(2);
 
-            fruits.Sort();
+            //fruits.Sort();
+            var orderedFruits = fruits.OrderBy(x => x).ToList();
             Console.WriteLine("Ascending sort: ");
-            foreach (var fruit in fruits)
+            foreach (var fruit in orderedFruits)
             {
                 Console.WriteLine(fruit);
             }
 
-            fruits.Sort();
-            fruits.Reverse();
+
+            var orderedF = fruits.OrderByDescending(x=>x);
             Console.WriteLine("\nDescending sort: ");
-            foreach (var fruit in fruits)
+            foreach (var fruit in orderedF)
             {
                 Console.WriteLine(fruit);
             }

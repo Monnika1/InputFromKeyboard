@@ -10,20 +10,29 @@ namespace Phonebook
              {"Robert", "123-858-3233" },
              {"Alex","244-245-5689"}
         };
-            string searchName = "Monika";
-            if (contacts.ContainsKey(searchName))
+            string searchName = "Monika2";
+
+            try
             {
-                Console.WriteLine($"{searchName} exists in the contacts. ");
+                if (contacts.ContainsKey(searchName))
+                {
+                    Console.WriteLine($"{searchName},{contacts["Monika"]} exists in the contacts. ");
+                }
+                else
+                {
+                    Console.WriteLine($"{searchName} does not exist in the contacts.");
+                }
             }
-            else
+            catch (KeyNotFoundException)
             {
-                Console.WriteLine($"{searchName} does not exist in the contacts.");
+                Console.WriteLine($"The contact {searchName} was not found.");
             }
+
             string retrieveName = "Robert";
             if (contacts.TryGetValue(retrieveName, out string phoneNumber))
             {
                 Console.WriteLine($"{retrieveName}'s phone number is {phoneNumber}.");
-            }
+            } 
             string removeName = "Alex";
             if (contacts.Remove(removeName))
             {
