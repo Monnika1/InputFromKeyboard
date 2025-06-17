@@ -1,0 +1,52 @@
+﻿using OnlineBookstore.Models.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OnlineBookstore.Models
+{
+    internal class BookCatalog : BookCatalogBase
+    {
+        private List<IBook> books;
+    
+
+        public BookCatalog()
+        {
+            books = new List<IBook>();
+        }
+
+        public override void AddBook(IBook book)
+        {
+            if (book == null)
+            {
+                throw new ArgumentNullException(nameof(book), "Книгата не може да бъде null.");
+            }
+            if (books.Contains(book))
+            {
+                throw new ArgumentException("Книгата вече се съдържа в каталога.");
+            }
+            books.Add(book);
+        }
+        public override IBook RemoveBook(IBook book)
+        {
+            if (!books.Contains(book))
+            {
+                throw new ArgumentException("Книгата не се съдържа в каталога.");
+            }
+            books.Remove(book);
+            return book;
+        }
+
+        public override IEnumerable<IBook> GetBooks()
+        {
+            return books;
+        }
+
+        public override IBook GetBookByName(string bookName)
+        {
+            return books.FirstOrDefault(b => b.Title.Equals(bookName, StringComparison.OrdinalIgnoreCase));
+        }
+    }
+}
