@@ -48,5 +48,19 @@ namespace OnlineBookstore.Models
         {
             return books.FirstOrDefault(b => b.Title.Equals(bookName, StringComparison.OrdinalIgnoreCase));
         }
+
+        public bool IsEBook(string bookName) 
+        {
+            IBook book = GetBookByName(bookName);
+
+            return book.GetType() == typeof(EBook);
+        }
+
+        internal bool IsAvailable(string bookName, int quantity, decimal price)
+        {
+            List<IBook> booksWithThatName = books.Where(b => b.Title.Equals(bookName, StringComparison.OrdinalIgnoreCase)).ToList();
+            bool isQuantityEnough = booksWithThatName.Count >= quantity;
+            return isQuantityEnough;
+        }
     }
 }
