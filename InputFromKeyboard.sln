@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo", "Zoo\Zoo.csproj", "{1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBookstore", "OnlineBookstore\OnlineBookstore\OnlineBookstore.csproj", "{E98F0930-EE83-4C73-B93A-B6CB1D0972F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalSimulation", "AnimalSimulation\AnimalSimulation.csproj", "{52A8D0C9-8778-4F06-BA0F-28E039758A5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{E98F0930-EE83-4C73-B93A-B6CB1D0972F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E98F0930-EE83-4C73-B93A-B6CB1D0972F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E98F0930-EE83-4C73-B93A-B6CB1D0972F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A8D0C9-8778-4F06-BA0F-28E039758A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A8D0C9-8778-4F06-BA0F-28E039758A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A8D0C9-8778-4F06-BA0F-28E039758A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A8D0C9-8778-4F06-BA0F-28E039758A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
