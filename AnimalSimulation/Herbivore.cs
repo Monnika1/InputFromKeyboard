@@ -1,24 +1,18 @@
-﻿using AnimalSimulation.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AnimalSimulation
+﻿namespace AnimalSimulation
 {
-    internal class Herbivore : IAnimal
+    public class Herbivore : Animal
     {
-        public string Name { get ; set ; }
-        public int Position { get ; set ; }
-
-        public bool IsAlive { get; set; }
-
-        public Herbivore(string name, int position)
+        public Herbivore(string name, Position currentPosition) : base(name,currentPosition)
         {
-            Name = name;
-            Position = position;
-            IsAlive = true; 
+        }
+
+        public override bool CanEat()
+        {
+            return false;
+        }
+
+        public override void Eat(Animal animal)
+        {
         }
     }
 }

@@ -12,17 +12,15 @@
                 ("Kiril", "A"),
                 ("Max", "C")
             };
+
             var groupedStudents = students
-                 .GroupBy(s => s.Grade).ToDictionary(g => g.Key, g => g.Select(s => s.Name).ToList());
+                 .GroupBy(s => s.Grade)
+                 .ToDictionary(g => g.Key, g => g.Select(s => s.Name));
 
             foreach (var pair in groupedStudents)
             {
                 Console.WriteLine($"{pair.Key}-{string.Join(", ", pair.Value)}");
-
             }
-
-
         }
     }
-
 }

@@ -1,47 +1,32 @@
-﻿using AnimalSimulation.Interfaces;
-
-namespace AnimalSimulation
+﻿namespace AnimalSimulation
 {
     internal class Program
     {
         private static Timer _timer;
         static void Main(string[] args)
         {
-            TimerCallback callback= new TimerCallback(ExecuteMethod);
-        
-            
-            List<IAnimal> animals = new List<IAnimal>();
-            animals.Add(new Herbivore("Deer", 1));
-            animals.Add(new Herbivore("Rabbit", 2));
-            animals.Add(new Carnivore("Lion", 3));
-            animals.Add(new Carnivore("Tiger", 4));
-            World world = new World();
-            var state = new TimerState { World = world, Animals = animals };
-            _timer = new Timer(callback, state, 0, 2000);
-            Console.ReadLine();
-        }
-        private static void ExecuteMethod(object state)
-        {
-            if (state is TimerState timerState)
+            Console.WriteLine("Animal Simulation Started");
+            World world = new World(4, 4, 1000);
+            List<Animal> animals = new List<Animal>
             {
-                var herbivores = timerState.Animals.OfType<Herbivore>().ToList();
-                var herbivoresLeft = herbivores.Any(a => a.IsAlive);
-                if (!herbivoresLeft)
+                new Carnivore("Lion", new Position(0, 0)),
+                new Herbivore("Deer", new Position(1, 1)),
+                new Carnivore("Tiger", new Position(2, 2)),
+                new Herbivore("Rabbit", new Position(3, 3))
+            };
+            _timer = new Timer((e) =>
+            {
+                world.DoTheSimulation(animals);
+                if (!world.AreThereAnyAliveHerbivores(animals))
                 {
-                    Console.WriteLine("All herbivores are gone. Simulation over.");
-                    _timer.Dispose(); 
-                    Environment.Exit(0); 
+                    Console.WriteLine("All herbivores are dead. Simulation ending.");
+                    _timer.Dispose();
+                    return;
                 }
+            }, null, 0, world.TimeInMiliseconds);
+            Console.WriteLine("Press any key to exit...");
 
-                timerState.World.ChangePositions(timerState.Animals);
-                timerState.World.CheckForCollisions(timerState.Animals);
-            }
-            else
-            {
-                Console.WriteLine("Invalid state passed to the timer callback.");
-            }
-            
-            
+            Console.ReadLine();
         }
     }
 }

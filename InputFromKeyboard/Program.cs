@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace InputFromKeyboard
+﻿namespace InputFromKeyboard
 {
     internal class ProgramA
     {
