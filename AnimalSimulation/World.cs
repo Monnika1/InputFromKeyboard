@@ -40,10 +40,10 @@
                     continue;
 
                 else if(random == 2)
-                    cell.Animals.Add(new Carnivore("Carnivore", cell.Coordinates));
+                    cell.Animals.Add(new Carnivore("Carnivore", cell.Coordinates,0));
 
                 else if (random == 3)
-                    cell.Animals.Add(new Herbivore("Herbivore", cell.Coordinates));
+                    cell.Animals.Add(new Herbivore("Herbivore", cell.Coordinates, 1));
             }
 
             return list;
@@ -53,11 +53,20 @@
         {
             ChangePositions(animals);
             CheckForCollisions(animals);
+            IncreaseAge(animals);
             PrintAnimalPositions(animals);
         }
         public bool AreThereAnyAliveHerbivores(IEnumerable<Animal> animals)
         {
             return animals.OfType<Herbivore>().Any(h => h.IsAlive);
+        }
+
+        private void IncreaseAge(IEnumerable<Animal> animals)
+        {
+            foreach (var animal in animals)
+            {
+                animal.Age++;
+            }
         }
         private void ChangePositions(IEnumerable<Animal> animals)
         {
@@ -81,6 +90,34 @@
                         carnivore.AnimalsEaten++;
                         herbivore.IsAlive = false;
                         Console.WriteLine($"{carnivore.Name} has eaten {herbivore.Name} at position {herbivore.CurrentPosition}.");
+                    }
+                }
+            }
+            var animalsAlive = animals.Where(x => x.IsAlive).ToList();
+            for (int i = 0; i < animalsAlive.Count(); i++)
+            {
+                var firstAnimal = animalsAlive[i];
+                if (firstAnimal.Age>=5)
+                {
+                    for (int j = 1; j < animalsAlive.Count(); j++)
+                    {
+                        var secondAnimal = animalsAlive[j];
+                        if (secondAnimal.Age<5)
+                        {
+                            break;
+                        }
+                        var chance = rnd.NextDouble();
+                        Animal child; 
+                        if (chance < 0.5)
+                        {
+                            child = new Herbivore("baby Rabbit", secondAnimal.CurrentPosition,0);
+                        }
+                        else 
+                        {
+                            child = new Herbivore("baby Rabbit", secondAnimal.CurrentPosition, 1);
+                        }
+                        animals.ToList().Add(child);
+                        Console.WriteLine($"{firstAnimal.Name} and {secondAnimal.Name} have baby {child.Name} with {child.Gender} gender.");
                     }
                 }
             }

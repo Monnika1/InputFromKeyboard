@@ -9,10 +9,11 @@
             World world = new World(4, 4, 1000);
             List<Animal> animals = new List<Animal>
             {
-                new Carnivore("Lion", new Position(0, 0)),
-                new Herbivore("Deer", new Position(1, 1)),
-                new Carnivore("Tiger", new Position(2, 2)),
-                new Herbivore("Rabbit", new Position(3, 3))
+                new Carnivore("Lion", new Position(0, 0), 1),
+                new Herbivore("Deer", new Position(1, 1), 0),
+                new Carnivore("Tiger", new Position(2, 2), 1),
+                new Herbivore("Rabbit", new Position(3, 3), 0),
+                new Herbivore("Rabbit", new Position(0, 0), 0)
             };
             _timer = new Timer((e) =>
             {

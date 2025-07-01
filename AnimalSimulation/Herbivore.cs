@@ -2,7 +2,7 @@
 {
     public class Herbivore : Animal
     {
-        public Herbivore(string name, Position currentPosition) : base(name,currentPosition)
+        public Herbivore(string name, Position currentPosition, int gender) : base(name,currentPosition, gender)
         {
         }
 

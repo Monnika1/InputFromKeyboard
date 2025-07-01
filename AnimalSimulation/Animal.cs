@@ -5,11 +5,15 @@
         public string Name { get; set; }
         public Position CurrentPosition { get; set; }
         public bool IsAlive { get; set; }
-        public Animal(string name, Position position)
+        public int Gender { get; set; }
+        public int Age { get; set; }
+
+        public Animal(string name, Position position, int gender)
         {
             Name = name;
             CurrentPosition = position;
             IsAlive = true;
+            Gender = gender;
         }
         public Position Move()
         {

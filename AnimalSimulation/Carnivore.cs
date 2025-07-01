@@ -4,7 +4,7 @@
     {
         public int AnimalsEaten { get; set; }
 
-        public Carnivore(string name, Position current) : base(name, current)
+        public Carnivore(string name, Position current, int gender) : base(name, current, gender)
         {
             AnimalsEaten = 0;
         }
