@@ -8,7 +8,7 @@
             ReadFilesAndDirectories(rootPath);
             Console.ReadLine();
 
-           string name = MoniReturn("Monika");
+           
         }
         static void ReadFilesAndDirectories(string path)
         {

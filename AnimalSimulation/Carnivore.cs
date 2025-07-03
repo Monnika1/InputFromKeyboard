@@ -4,7 +4,7 @@
     {
         public int AnimalsEaten { get; set; }
 
-        public Carnivore(string name, Position current, int gender) : base(name, current, gender)
+        public Carnivore(string name, Position current) : base(name, current)
         {
             AnimalsEaten = 0;
         }
@@ -20,7 +20,6 @@
 
             if (attackModifier.WillDie())
             {
-                Console.WriteLine($"{Name} has eaten the herbivore");
                 if (animal is Herbivore herbivore)
                 {
                     herbivore.IsAlive = false;
@@ -29,8 +28,24 @@
             }
             else
             {
-                Console.WriteLine($"{Name} couldn't eat the herbivore.");
+                if (animal is Carnivore carnivore)
+                {
+                    carnivore.IsAlive = true;
+                }
             }
+        }
+        public override Animal Mate(Animal anotherAnimal)
+        {
+            if (anotherAnimal is Carnivore)
+            {
+                bool areDifferentGender = Gender != anotherAnimal.Gender;
+                bool areOldENough = Age >= 5 && anotherAnimal.Age >= 5;
+                if (areDifferentGender && areOldENough)
+                {
+                    return new Carnivore("Carnivore", CurrentPosition);
+                }
+            }
+            return null;
         }
     }
 }

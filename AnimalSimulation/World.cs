@@ -1,4 +1,6 @@
-﻿namespace AnimalSimulation
+﻿using AnimalSimulation;
+
+namespace AnimalSimulation
 {
     internal class World
     {
@@ -10,12 +12,15 @@
 
         public List<Cell> Cells { get; set; }
 
+        public PositionVaidator Validator { get; set; }
+
         public World(int x, int y, int miliseconds)
         {
             TimeInMiliseconds = miliseconds;
             Cells = PopulateWorld(x, y);
             StartOfWorld = new Position(0, 0);
             EdgeOfTheWorld = new Position(x - 1, y - 1);
+            Validator = new PositionVaidator(StartOfWorld, EdgeOfTheWorld);
         }
 
         private List<Cell> PopulateWorld(int x, int y)
@@ -34,107 +39,113 @@
 
             foreach (Cell cell in list)
             {
-                int random = rnd1.Next(1, 3);
-
+                int random = rnd1.Next(1, 4);
                 if (random == 1)
                     continue;
 
-                else if(random == 2)
-                    cell.Animals.Add(new Carnivore("Carnivore", cell.Coordinates,0));
+                else if (random == 2)
+                {
+                    cell.Animals.Add(new Carnivore("Carnivore", cell.Coordinates));
+                }
 
                 else if (random == 3)
-                    cell.Animals.Add(new Herbivore("Herbivore", cell.Coordinates, 1));
+                {
+                    cell.Animals.Add(new Herbivore("Herbivore", cell.Coordinates));
+                }
             }
-
             return list;
-        }
 
-        public void DoTheSimulation(IEnumerable<Animal> animals)
-        {
-            ChangePositions(animals);
-            CheckForCollisions(animals);
-            IncreaseAge(animals);
-            PrintAnimalPositions(animals);
         }
-        public bool AreThereAnyAliveHerbivores(IEnumerable<Animal> animals)
+        public void DoTheSimulation()
         {
-            return animals.OfType<Herbivore>().Any(h => h.IsAlive);
-        }
-
-        private void IncreaseAge(IEnumerable<Animal> animals)
-        {
-            foreach (var animal in animals)
+            foreach (var animal in Cells.SelectMany(x => x.Animals).ToList())
             {
-                animal.Age++;
+                ChangePositions(animal);
+            }
+
+            foreach (var cell in Cells)
+            {
+                IncreaseAge(cell);
+            }
+
+            PrintAnimalPositions();
+        }
+
+        public bool AreThereAnyAliveHerbivores()
+        {
+            return Cells.SelectMany(x => x.Animals).OfType<Herbivore>().Any(h => h.IsAlive);
+        }
+        private void IncreaseAge(Cell cell)
+        {
+            foreach (var animal in cell.Animals)
+            {
+                animal.Grow();
             }
         }
-        private void ChangePositions(IEnumerable<Animal> animals)
+        private void ChangePositions(Animal current)
         {
-            foreach (var animal in animals)
-            {
-               animal.CurrentPosition = animal.Move();
-            }
-        }
-        private void CheckForCollisions(IEnumerable<Animal> animals)
-        {
-            var herbivores = animals.OfType<Herbivore>();
-            var carnivores = animals.OfType<Carnivore>();
-            Random rnd = new Random();
+            Cell cell = Cells.Where(x => x.Coordinates.Equals(current.CurrentPosition)).SingleOrDefault();
+            if (cell is null)
+                return;
 
-            foreach (var carnivore in carnivores)
+            Position newPosition = current.Move();
+            if (Validator.IsValidPosition(newPosition) && newPosition != current.CurrentPosition)
             {
-                foreach (var herbivore in herbivores)
+                Cell newCell = Cells.Where(x => x.Coordinates.Equals(newPosition)).FirstOrDefault();
+                if (newCell is not null)
                 {
-                    if (carnivore.CurrentPosition == herbivore.CurrentPosition && herbivore.IsAlive && rnd.NextDouble() < 0.6)
+                    cell.Leave(current);
+                    newCell.Visit(current);
+                    current.CurrentPosition = newPosition;
+
+                    foreach (var another in newCell.Animals.ToList().Except([current]))
                     {
-                        carnivore.AnimalsEaten++;
-                        herbivore.IsAlive = false;
-                        Console.WriteLine($"{carnivore.Name} has eaten {herbivore.Name} at position {herbivore.CurrentPosition}.");
+                        Animal newAnimal = current.Mate(another);
+                        if (newAnimal is not null)
+                            newCell.Visit(current);
                     }
                 }
             }
-            var animalsAlive = animals.Where(x => x.IsAlive).ToList();
-            for (int i = 0; i < animalsAlive.Count(); i++)
+
+        }
+        private async void PrintAnimalPositions()
+        {
+            Console.Clear();
+
+            for (int y = StartOfWorld.Y; y <= EdgeOfTheWorld.Y; y++)
             {
-                var firstAnimal = animalsAlive[i];
-                if (firstAnimal.Age>=5)
+                for (int x = StartOfWorld.X; x <= EdgeOfTheWorld.X; x++)
                 {
-                    for (int j = 1; j < animalsAlive.Count(); j++)
+                    Cell currentCell = Cells.Where(cell => cell.Coordinates.X.Equals(x) && cell.Coordinates.Y.Equals(y)).SingleOrDefault();
+                    if (currentCell == null || currentCell.Animals.Count == 0)
                     {
-                        var secondAnimal = animalsAlive[j];
-                        if (secondAnimal.Age<5)
-                        {
-                            break;
-                        }
-                        var chance = rnd.NextDouble();
-                        Animal child; 
-                        if (chance < 0.5)
-                        {
-                            child = new Herbivore("baby Rabbit", secondAnimal.CurrentPosition,0);
-                        }
-                        else 
-                        {
-                            child = new Herbivore("baby Rabbit", secondAnimal.CurrentPosition, 1);
-                        }
-                        animals.ToList().Add(child);
-                        Console.WriteLine($"{firstAnimal.Name} and {secondAnimal.Name} have baby {child.Name} with {child.Gender} gender.");
+                        Console.Write("[   ]");
+                        continue;
+                    }
+                    Animal animal = currentCell.Animals.First();
+
+                    if (animal.Age >= 5 && animal is Carnivore)
+                    {
+                        Console.Write("[ C ]");
+                    }
+                    else if (animal.Age >= 5 && animal is Herbivore)
+                    {
+                        Console.Write("[ H ]");
+                    }
+                    else if (animal.Age < 5 && animal is Carnivore)
+                    {
+                        Console.Write("[ c ]");
+                    }
+                    else if (animal.Age < 5 && animal is Herbivore)
+                    {
+                        Console.Write("[ h ]");
                     }
                 }
+                Console.WriteLine();
             }
-        }
-        private void PrintAnimalPositions(IEnumerable<Animal> animals)
-        {
-            foreach (var animal in animals)
-            {
-                if (animal is Herbivore herbivore)
-                {
-                    Console.WriteLine($"{herbivore.Name} is at position {herbivore.CurrentPosition}. Alive: {herbivore.IsAlive}");
-                }
-                else if (animal is Carnivore carnivore)
-                {
-                    Console.WriteLine($"{carnivore.Name} is at position {carnivore.CurrentPosition}. Animals eaten: {carnivore.AnimalsEaten}");
-                }
-            }
+            await Task.Delay(TimeInMiliseconds);
+            Console.Write(Environment.NewLine);
         }
     }
 }
+

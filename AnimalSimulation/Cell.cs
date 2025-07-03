@@ -3,7 +3,7 @@
     internal class Cell
     {
         public Position Coordinates { get; set; }
-
+    
         public List<Animal> Animals { get; set; }
 
         public Cell(Position coordinates)
