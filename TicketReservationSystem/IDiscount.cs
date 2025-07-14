@@ -8,6 +8,10 @@ namespace TicketReservationSystem
 {
     internal interface IDiscount
     {
+        /// <summary>
+        /// </summary>
+        /// <param name="price"></param>
+        /// <returns>the price with the discount</returns>
         decimal ApplyDiscount(decimal price);
         string GetDiscountType()
         {

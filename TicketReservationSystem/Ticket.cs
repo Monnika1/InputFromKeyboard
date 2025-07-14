@@ -13,7 +13,7 @@ namespace TicketReservationSystem
 
         public enum TicketType
         {
-            Standart, 
+            Standard, 
             VIP
         }
 
