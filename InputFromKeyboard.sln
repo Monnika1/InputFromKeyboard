@@ -39,7 +39,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalSimulation", "AnimalS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{CC21C306-F614-4739-9B44-93F83FE1F1B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketReservationSystem", "TicketReservationSystem\TicketReservationSystem.csproj", "{74F66211-6115-49EF-B3EE-4620D18FB635}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketReservationSystem", "TicketReservationSystem\TicketReservationSystem.csproj", "{74F66211-6115-49EF-B3EE-4620D18FB635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskApi", "TaskApi\TaskApi.csproj", "{44FCD7E4-6FC8-4B44-83A1-95352D5CD320}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskApi_2", "TaskApi_2\TaskApi_2.csproj", "{B653A6F9-C44B-49B5-B9A1-DEA6D1FDE448}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +127,14 @@ Global
 		{74F66211-6115-49EF-B3EE-4620D18FB635}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74F66211-6115-49EF-B3EE-4620D18FB635}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74F66211-6115-49EF-B3EE-4620D18FB635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44FCD7E4-6FC8-4B44-83A1-95352D5CD320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44FCD7E4-6FC8-4B44-83A1-95352D5CD320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44FCD7E4-6FC8-4B44-83A1-95352D5CD320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44FCD7E4-6FC8-4B44-83A1-95352D5CD320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B653A6F9-C44B-49B5-B9A1-DEA6D1FDE448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B653A6F9-C44B-49B5-B9A1-DEA6D1FDE448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B653A6F9-C44B-49B5-B9A1-DEA6D1FDE448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B653A6F9-C44B-49B5-B9A1-DEA6D1FDE448}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
